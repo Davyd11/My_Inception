@@ -1,0 +1,6 @@
+FROM alpine
+LABEL maintainer="dpuente-"
+
+RUN apt-get -y update && apt -y install nginx
+
+COPY srcs/index.html /tmp/index.html
