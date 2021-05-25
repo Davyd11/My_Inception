@@ -1,6 +1,17 @@
-FROM alpine
+FROM alpine:3.12
 LABEL maintainer="dpuente-"
 
-RUN apt-get -y update && apt -y install nginx
+#update pacages and install nginx
+RUN apk update && apk add --no-cache nginx && \
+							mkdir /run/nginx
 
+#copy configuration into container
+COPY ./srcs/nginx-conf ./tmp/nginx-conf
+
+#copy front page just for testing
 COPY srcs/index.html /tmp/index.html
+
+COPY srcs/start.sh ./
+RUN chmod +x ./start.sh
+
+CMD ./start.sh
