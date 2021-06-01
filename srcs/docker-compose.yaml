@@ -1,10 +1,13 @@
 version: '3'
 
 services:
-  nginx:
+  	nginx:
+		image: nginx-service
+		ports:
+			443:443
 
 	wordpress:
-		image: wordpress
+		image: wordpress-service
 	    links:
 	     - mariadb:mysql
 	    environment:
@@ -17,9 +20,9 @@ services:
 	     - ./html:/var/www/html
 
   mariadb:
-	image: mariadb
+	image: mariadb-service
 	    environment:
 	     - MYSQL_ROOT_PASSWORD="${DB_PW}"
 	     - MYSQL_DATABASE=wordpress
 	    volumes:
-	     - ./database:/var/lib/mysql
+	     - /Mariadb/db-volume/:/usr/share/nginx/
