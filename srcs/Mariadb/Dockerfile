@@ -4,4 +4,8 @@ LABEL maintainer="dpuente-"
 #update packages and install mariadb
 RUN apk update && apk add --no-cache mariadb
 
-EXPOSE 3306
+
+LABEL version="1.0"
+LABEL description="MariaDB Server"
+
+CMD ["mysqld"]

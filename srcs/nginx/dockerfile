@@ -1,9 +1,9 @@
 FROM alpine:3.12
 LABEL maintainer="dpuente-"
 
-#update pacages and install nginx
-RUN apk update && apk add --no-cache nginx && \
-							mkdir /run/nginx
+#update packages and install nginx
+RUN apk update && apk add --no-cache nginx
+RUN mkdir /run/nginx
 
 #copy configuration into container
 COPY ./srcs/nginx-conf ./tmp/nginx-conf

@@ -16,13 +16,13 @@ services:
 	    ports:
 	     - 9000:9000
 		 - 3306:3306
-	    volumes:
-	     - ./html:/var/www/html
+	   # volumes:
+	    # - ./html:/var/www/html
 
   mariadb:
 	image: mariadb-service
 	    environment:
 	     - MYSQL_ROOT_PASSWORD="${DB_PW}"
 	     - MYSQL_DATABASE=wordpress
-	    volumes:
-	     - /Mariadb/db-volume/:/usr/share/nginx/
+	    #volumes:
+	    # - /Mariadb/db-volume/:/usr/share/nginx/

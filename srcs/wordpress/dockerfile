@@ -14,5 +14,6 @@ RUN wget https://wordpress.org/latest.tar.gz \
 
 #takes the php config and pasted on the container
 COPY srcs/wp-config.php www/wp-config.php
+CMD /usr/bin/php -S 0.0.0.0:9000 -t /www/
 
 EXPOSE 9000
