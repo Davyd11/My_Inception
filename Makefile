@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/06/04 12:17:26 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/06/08 11:53:10 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ run:
 #docker run -it -p 443:443 --name nginx service_nginx
 	docker run -it -p 9000:9000 --name wordpress service_wordpress
 fast:
-	docker build -t service_nginx srcs/nginx/ &>/dev/null
+	docker build -t service_nginx srcs/nginx/
 	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
 	docker build -t service_mariadb srcs/Mariadb/ &>/dev/null
 
@@ -52,4 +52,4 @@ stop:
 del:
 	docker rm $$(docker ps -a -q)
 prune:
-	docker rm $$(docker ps -a -q) ; docker rmi $$(docker images -a -q)
+	docker system prune -a -f
