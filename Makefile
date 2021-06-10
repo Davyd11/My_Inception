@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/06/08 11:53:10 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/06/10 13:00:46 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,9 @@ fast:
 	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
 	docker build -t service_mariadb srcs/Mariadb/ &>/dev/null
 
-	docker run -it -p 80:80 --name nginx service_nginx	
-#docker run -it -p 3306:3306 --name maridb service_mariadb
+	docker-compose -f srcs/docker-compose.yaml up -d
+#docker run -it -p 80:80 --name nginx service_nginx	
+#docker run -it -p --name maridb service_mariadb
 #docker run -it -p 9000:9000 --name wordpress service_wordpress
 
 stop:

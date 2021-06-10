@@ -5,7 +5,6 @@ LABEL maintainer="dpuente-"
 RUN apk update && apk add --no-cache nginx \
 && apk add --no-cache --upgrade bash \
 && apk add openssl && mkdir -p var/run/nginx \
-&& apk add openssl openssh \
 && rm -rf /var/cache/apk/*
 
 
@@ -20,6 +19,13 @@ COPY ./srcs/nginx-conf ./etc/nginx/nginx-conf
 
 #copy front page just for testing
 COPY srcs/index.html /tmp/index.html
+
+#SSl
+RUN chmod 700 /etc/ssl/certs && \
+	openssl req -x509 -nodes -days 365 \
+    -newkey rsa:2048 -subj "/C=SP/ST=Spain/L=Madrid/O=42/CN=localhost" \
+    -out /etc/ssl/certs/nginx-selfsigned.pem \
+    -keyout /etc/ssl/certs/nginx-selfsigned.key
 
 COPY srcs/start.sh ./
 RUN chmod +x ./start.sh

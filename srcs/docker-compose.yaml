@@ -1,28 +1,32 @@
 version: '3'
 
 services:
-  	nginx:
-		image: nginx-service
-		ports:
-			443:443
+    nginx:
+        image: service_nginx
+        ports:
+            - 443:443
 
-	wordpress:
-		image: wordpress-service
-	    links:
-	     - mariadb:mysql
-	    environment:
-		 - WORDPRESS_DB_USER=root
-	     - WORDPRESS_DB_PASSWORD="${DB_PW}"
-	    ports:
-	     - 9000:9000
-		 - 3306:3306
-	   # volumes:
-	    # - ./html:/var/www/html
-
-  mariadb:
-	image: mariadb-service
-	    environment:
-	     - MYSQL_ROOT_PASSWORD="${DB_PW}"
-	     - MYSQL_DATABASE=wordpress
-	    #volumes:
-	    # - /Mariadb/db-volume/:/usr/share/nginx/
+    mariadb:
+        image: service_mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD="${DB_PW}"
+            #- MYSQL_DATABASE=wordpress
+        ports: 
+            - 3306:3306
+            #volumes:
+            # - Mariadb/db-volume/:/usr/share/nginx/
+    wordpress:
+        image: service_wordpress
+        links:
+            - mariadb:mysql
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: wordpress
+        ports:
+            - 9000:9000
+            - 3306:3306
+        restart: on-failure
+       # volumes:
+        # - ./html:/var/www/html
