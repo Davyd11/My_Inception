@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/06/10 13:00:46 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/06/10 19:39:45 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ all:
 	@echo " -- [stop] to stop all running containers"
 	@echo " -- [del] to delete all exited containers"
 	@echo " -- [prune] to delete all conatiners and images created"
+	@echo " -- [re] execute prune and fast"
 	@echo ""
 
 info:
@@ -36,8 +37,9 @@ build:
 	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
 	docker build -t service_mariadb srcs/Mariadb/ &>/dev/null
 run:
+	docker-compose -f srcs/docker-compose.yaml up -d
 #docker run -it -p 443:443 --name nginx service_nginx
-	docker run -it -p 9000:9000 --name wordpress service_wordpress
+#docker run -it -p 9000:9000 --name wordpress service_wordpress
 fast:
 	docker build -t service_nginx srcs/nginx/
 	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
@@ -54,3 +56,4 @@ del:
 	docker rm $$(docker ps -a -q)
 prune:
 	docker system prune -a -f
+re:	prune fast
