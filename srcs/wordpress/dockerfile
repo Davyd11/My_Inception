@@ -3,7 +3,7 @@ LABEL maintainer="dpuente-"
 
 #install php
 RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
-
+RUN apk add mariadb-client
 #downloads all wordpress files
 RUN wget https://wordpress.org/latest.tar.gz \
 && tar -xvf latest.tar.gz \
@@ -14,6 +14,5 @@ RUN wget https://wordpress.org/latest.tar.gz \
 
 #takes the php config and pasted on the container
 COPY srcs/wp-config.php www/wp-config.php
-CMD /usr/bin/php -S 0.0.0.0:9000 -t /www/
-
-EXPOSE 9000
+CMD tail -f /dev/null
+#CMD /usr/bin/php -S 0.0.0.0:9000 -t /www/ && tail -f /dev/null

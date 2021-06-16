@@ -18,10 +18,10 @@ RUN adduser -D -g 'www' www \
 COPY ./srcs/nginx-conf ./etc/nginx/nginx-conf
 
 #copy front page just for testing
-COPY srcs/index.html /tmp/index.html
+COPY srcs/index.html /var/lib/nginx/html/index.html
 
 #SSl
-RUN chmod 700 /etc/ssl/certs && \
+RUN chmod 777 /etc/ssl/certs && \
 	openssl req -x509 -nodes -days 365 \
     -newkey rsa:2048 -subj "/C=SP/ST=Spain/L=Madrid/O=42/CN=localhost" \
     -out /etc/ssl/certs/nginx-selfsigned.pem \
@@ -30,5 +30,6 @@ RUN chmod 700 /etc/ssl/certs && \
 COPY srcs/start.sh ./
 RUN chmod +x ./start.sh
 
-EXPOSE 80 443
-CMD ./start.sh
+#EXPOSE 80 443
+#CMD ./start.sh
+CMD ["nginx", "-g", "daemon off;"]
