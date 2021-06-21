@@ -2,46 +2,32 @@
 /**
  * List of env variables
  */
-$vars = array(
+/**$vars = array(
     'DB_NAME',
 	'DB_USER',
 	'DB_PASSWORD',
 	'DB_HOST'
-);
+);*/
 
 /**
  * Stock env variables in tab
  */
-foreach ($vars as $var) {
+/**foreach ($vars as $var) {
     $env = getenv($var);
     if (!isset($_ENV[$var]) && $env !== false) {
         $_ENV[$var] = $env;
     }
-}
+}*/
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpress' );
-
-/** MySQL database username */
+define( 'DB_NAME', 'website_db' );
 define( 'DB_USER', 'user' );
-
-/** MySQL database password */
-define( 'DB_PASSWORD', 'password' );
-
-/** MySQL hostname */
-define( 'DB_HOST', 'mysql-service' );
-
-define('WP_HOME', 'http://AAAIPAAA:9000' );
-define('WP_SITEURL', 'http://AAAIPAAA:9000' );
-
-/** Database Charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
-
-/** The Database Collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
-
-define('AUTHOR', 'tmarx');
+define( 'DB_PASSWORD', 'user' );
+define( 'DB_HOST', 'localhost:8080' );
+define( 'DB_CHARSET', 'utf8mb4' );
+define( 'DB_COLLATE', 'utf8mb4_general_ci' );
+$table_prefix  = 'wp_';
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -69,8 +55,6 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = 'wp_';
-
 /**
  * For developers: WordPress debugging mode.
  *

@@ -5,21 +5,42 @@ services:
         image: service_nginx
         restart: always
         ports:
-            - 443:443
+            - "443:443"
+            - "80:80"
 
-    mariadb:
-        image: service_mariadb
+    #mariadb:
+     #   image: service_mariadb
+        #restart: always
+      #  environment:
+        #    - MYSQL_ROOT_PASSWORD="${DB_PW}"
+        #volumes:
+        #    - ./Mariadb/db-volume:/usr/share/nginx/
+    db:
+        image: mariadb
         restart: always
         environment:
-            - MYSQL_ROOT_PASSWORD="${DB_PW}"
-        volumes:
-            - ./Mariadb/db-volume:/usr/share/nginx/
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: user
+          MYSQL_PASSWORD: user
+        
+        volumes: 
+            - ./init:/docker-entrypoint-initdb.d
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+          - 8080:8080
 
     wordpress:
         image: service_wordpress
         restart: always
-        links:
-            - mariadb:mysql
+        ports:
+            - 9000:9000
+        depends_on:
+            - db
+#        links:
+#            - mariadb:mysql
         environment:
             WORDPRESS_DB_USER: "${DB_USER}"
             WORDPRESS_DB_PASSWORD: "${DB_PW}"

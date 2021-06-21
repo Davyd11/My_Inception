@@ -27,8 +27,8 @@ RUN chmod 777 /etc/ssl/certs && \
     -out /etc/ssl/certs/nginx-selfsigned.pem \
     -keyout /etc/ssl/certs/nginx-selfsigned.key
 
-COPY srcs/start.sh ./
-RUN chmod +x ./start.sh
+#COPY srcs/start.sh ./
+#RUN chmod +x ./start.sh
 
 #EXPOSE 80 443
 #CMD ./start.sh
