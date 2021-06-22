@@ -16,6 +16,8 @@ RUN wget http://wordpress.org/latest.tar.gz\
 && rm -f latest.tar.gz\
 && rm -rf /var/cache/apk/*
 
+RUN sed -e '/skip-networking/s/^/#/g' -i /etc/my.cnf.d/mariadb-server.cnf
+
 #takes the php config and pasted on the container
 COPY srcs/wp-config.php www/wp-config.php
 #CMD tail -f /dev/null 
