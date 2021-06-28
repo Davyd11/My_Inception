@@ -24,7 +24,7 @@
 define( 'DB_NAME', 'mydb' );
 define( 'DB_USER', 'user' );
 define( 'DB_PASSWORD', 'user' );
-define( 'DB_HOST', 'srcs_db_1' );
+define( 'DB_HOST', 'mariadb' );
 define( 'DB_CHARSET', 'utf8mb4' );
 define( 'DB_COLLATE', 'utf8mb4_general_ci' );
 $table_prefix  = 'wp_';
