@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/06/28 12:32:00 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/06/30 12:50:25 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,10 @@ all:
 	@echo " -- [del] to delete all exited containers"
 	@echo " -- [prune] to delete all conatiners and images created"
 	@echo " -- [re] execute prune and fast"
+	@echo " -- [nginx] access bash container"
+	@echo " -- [wordpress] access bash container"
+	@echo " -- [mariadb] access bash container"
+	
 	@echo ""
 
 info:
@@ -38,8 +42,8 @@ build:
 run:
 	docker-compose -f srcs/docker-compose.yaml up -d
 fast:
-	docker build -t service_nginx srcs/nginx/ &>/dev/null
-	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
+	docker build -t service_nginx srcs/nginx/ 
+	docker build -t service_wordpress srcs/wordpress/
 	docker build -t service_mariadb srcs/Mariadb/
 
 	docker-compose -f srcs/docker-compose.yaml up -d
@@ -50,4 +54,10 @@ del:
 	docker rm $$(docker ps -a -q)
 prune:
 	docker system prune -a -f
-re:	prune fast
+nginx:
+	docker exec -it nginx bash
+wordpress:
+	docker exec -it wordpress bash
+mariadb:
+	docker exec -it mariadb bash
+re:	stop prune fast

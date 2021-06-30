@@ -39,6 +39,7 @@ services:
 
     wordpress:
         image: service_wordpress
+        container_name: wordpress
         restart: always
         ports:
             - 9000:9000
