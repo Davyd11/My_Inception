@@ -1,7 +1,22 @@
 version: '3'
 
+volumes:
+    wordpress:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: srcs/wordpress/data/
+    mariadb:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: srcs/Mariadb/data/
 services:
     nginx:
+        depends_on:
+            - wordpress
         image: service_nginx
         container_name: nginx
         restart: always
@@ -10,6 +25,8 @@ services:
         ports:
             - "443:443"
             - "80:80"
+        volumes:
+        - wordpress:/www/
 
     mariadb:
         image: service_mariadb
@@ -45,12 +62,10 @@ services:
             - 9000:9000
         depends_on:
             - mariadb
-#        links:
-#            - mariadb:mysql
         environment:
             WORDPRESS_DB_USER: "${DB_USER}"
             WORDPRESS_DB_PASSWORD: "${DB_PW}"
             WORDPRESS_DB_NAME: "${DB_NAME}"
         restart: on-failure
         volumes:
-            - ./wordpress/ws-volume:/var/www/html
+            - wordpress:/www/

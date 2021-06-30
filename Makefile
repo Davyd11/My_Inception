@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/06/30 12:50:25 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/01 00:23:13 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ info:
 	docker ps -a
 	@echo "--------------------------------------------------------------------------"
 build:
+	@mkdir -p srcs/wordpress/data
+	@mkdir -p srcs/Mariadb/data
 	docker build -t service_nginx srcs/nginx/ &>/dev/null
 	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
 	docker build -t service_mariadb srcs/Mariadb/
@@ -54,6 +56,7 @@ del:
 	docker rm $$(docker ps -a -q)
 prune:
 	docker system prune -a -f
+	docker volume prune -f
 nginx:
 	docker exec -it nginx bash
 wordpress:
