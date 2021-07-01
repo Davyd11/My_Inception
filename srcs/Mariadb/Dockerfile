@@ -10,7 +10,7 @@ RUN openrc && touch /run/openrc/softlevel && /etc/init.d/mariadb setup && /etc/i
 RUN sed -e '/skip-networking/s/^/#/g' -i /etc/my.cnf.d/mariadb-server.cnf
 
 LABEL version="1.0"
-LABEL description="MariaDB Server"
+LABEL description="mariadb Server"
 
 COPY srcs/start_mariadb.sh .
 RUN chmod -R 777 start_mariadb.sh

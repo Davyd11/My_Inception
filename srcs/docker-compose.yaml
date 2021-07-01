@@ -12,7 +12,7 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: srcs/Mariadb/data/
+            device: srcs/mariadb/data/
 services:
     nginx:
         depends_on:
@@ -35,31 +35,13 @@ services:
             - default
         restart: always
         env_file: .env
-        #volumes:
-        #    - ./Mariadb/db-volume:/usr/share/nginx/
-    #db:
-      #  image: mariadb
-      #  restart: always
-     #   environment:
-      #    MYSQL_ROOT_PASSWORD: example
-       #   MYSQL_DATABASE: mydb
-        #  MYSQL_USER: user
-         # MYSQL_PASSWORD: user
-        
-       # volumes: 
-        #    - ./init:/docker-entrypoint-initdb.d
-   # adminer:
-    #    image: adminer
-     #   restart: always
-    #    ports:
-    #      - 8080:8080
 
     wordpress:
         image: service_wordpress
         container_name: wordpress
         restart: always
-        ports:
-            - 9000:9000
+        networks:
+            - default
         depends_on:
             - mariadb
         environment:
@@ -69,3 +51,5 @@ services:
         restart: on-failure
         volumes:
             - wordpress:/www/
+networks: 
+    default:

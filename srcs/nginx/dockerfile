@@ -4,46 +4,31 @@ LABEL maintainer="dpuente-"
 #update packages and install nginx
 RUN apk update && apk add --no-cache nginx \
 && apk add --no-cache --upgrade bash \
-&& apk add openssl && mkdir -p var/run/nginx \
+&& apk add openssl && apk add openssh \
+&& mkdir -p var/run/nginx \
 && rm -rf /var/cache/apk/*
 
-#RUN apk add php7 wget php7-fpm php7-common php7-session php7-iconv php7-json \
-  #  php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo \
-  #  php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext \
-  #  php7-ldap php7-ctype php7-dom
+COPY ./srcs/nginx-conf ./etc/nginx/conf.d/default.conf
+#RUN wget http://wordpress.org/latest.tar.gz\
+#  && tar -xzvf latest.tar.gz && rm latest.tar.gz\
+#  && mv wordpress/* /var/www/localhost/htdocs/ \
+#  && rm -f latest.tar.gz\
+#  && rm -rf /var/cache/apk/*
 
 
-RUN wget http://wordpress.org/latest.tar.gz\
-&& tar -xzvf latest.tar.gz && rm latest.tar.gz\
-&& mv wordpress/* /var/www/localhost/htdocs/ \
-&& rm -f latest.tar.gz\
-&& rm -rf /var/cache/apk/*
 
-
-# create user for nginx && generate nginx folder && add permissions
-#RUN adduser -D -g 'www' www \
-#&& chown -R www:www /var/lib/nginx \
-#&& chown -R www:www /www
-#####chmod -R 755 app/storage
-
-RUN chmod -R 755 /var/www/localhost/htdocs/
-RUN chmod -R 755 /var/www/localhost/htdocs/index.php
-RUN chown -R nginx:nginx /var/www/localhost/htdocs
+#RUN chmod -R 755 /var/www/localhost/htdocs/
+#RUN chmod -R 755 /var/www/localhost/htdocs/index.php
+#RUN chown -R nginx:nginx /var/www/localhost/htdocs
 
 #copy configuration into container
 #RUN	rm -rf /etc/nginx.conf
-COPY ./srcs/nginx-conf ./etc/nginx/conf.d/default.conf
 
 #SSl
 RUN chmod 777 /etc/ssl/certs && \
 	openssl req -x509 -nodes -days 365 \
-    -newkey rsa:2048 -subj "/C=SP/ST=Spain/L=Madrid/O=42/CN=localhost" \
-    -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -keyout /etc/ssl/certs/nginx-selfsigned.key
+  -newkey rsa:2048 -subj "/C=SP/ST=Spain/L=Madrid/O=42/CN=localhost" \
+  -out /etc/ssl/certs/nginx-selfsigned.crt \
+  -keyout /etc/ssl/certs/nginx-selfsigned.key
 
-#COPY srcs/start.sh ./
-#RUN chmod +x ./start.sh
-
-#EXPOSE 80 443
-#CMD ./start.sh
 CMD ["nginx", "-g", "daemon off;"]

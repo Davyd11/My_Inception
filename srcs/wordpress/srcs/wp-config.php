@@ -21,6 +21,7 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
+
 define( 'DB_NAME', 'mydb' );
 define( 'DB_USER', 'user' );
 define( 'DB_PASSWORD', 'user' );
@@ -67,7 +68,11 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define( 'WP_DEBUG', false );
+
+#define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true ); 
+define( 'WP_DEBUG_LOG', true ); 
+define( 'WP_DEBUG_DISPLAY', false );
 
 /* That's all, stop editing! Happy publishing. */
 

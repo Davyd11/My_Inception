@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/01 00:23:13 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/01 10:15:32 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ all:
 	@echo " -- [nginx] access bash container"
 	@echo " -- [wordpress] access bash container"
 	@echo " -- [mariadb] access bash container"
-	
 	@echo ""
 
 info:
@@ -35,32 +34,39 @@ info:
 	@echo "--------------------------------------------------------------------------"
 	docker ps -a
 	@echo "--------------------------------------------------------------------------"
+
 build:
-	@mkdir -p srcs/wordpress/data
-	@mkdir -p srcs/Mariadb/data
-	docker build -t service_nginx srcs/nginx/ &>/dev/null
-	docker build -t service_wordpress srcs/wordpress/ &>/dev/null
-	docker build -t service_mariadb srcs/Mariadb/
-run:
-	docker-compose -f srcs/docker-compose.yaml up -d
-fast:
+	mkdir -p srcs/wordpress/data
+	mkdir -p srcs/mariadb/data
 	docker build -t service_nginx srcs/nginx/ 
 	docker build -t service_wordpress srcs/wordpress/
-	docker build -t service_mariadb srcs/Mariadb/
+	docker build -t service_mariadb srcs/mariadb/
 
+run:
 	docker-compose -f srcs/docker-compose.yaml up -d
+
+fast: build run
 
 stop:
 	docker stop $$(docker ps -q)
+
 del:
 	docker rm $$(docker ps -a -q)
+
+del_data:
+	rm -rf srcs/wordpress/data/*
+	rm -rf srcs/mariadb/data/*
 prune:
 	docker system prune -a -f
 	docker volume prune -f
+
 nginx:
-	docker exec -it nginx bash
+	docker exec -it nginx sh
+
 wordpress:
-	docker exec -it wordpress bash
+	docker exec -it wordpress sh
+
 mariadb:
-	docker exec -it mariadb bash
+	docker exec -it mariadb sh
+
 re:	stop prune fast
