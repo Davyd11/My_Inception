@@ -1,8 +1,9 @@
 FROM alpine:3.13
 LABEL maintainer="dpuente-"
 
-#install php
-RUN apk add php7 wget php7-fpm php7-common php7-session php7-iconv php7-json \
+#install php 
+RUN apk update && \
+	apk add php7 wget php7-fpm php7-common php7-session php7-iconv php7-json \
     php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo \
     php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext \
     php7-ldap php7-ctype php7-dom
@@ -21,6 +22,9 @@ RUN wget http://wordpress.org/latest.tar.gz\
 RUN  ln -s www/* wordpress/
 
 RUN sed -e '/skip-networking/s/^/#/g' -i /etc/my.cnf.d/mariadb-server.cnf
+
+#wordpress connection fastcgi on 0.0.0.0(replacing localhost to 0.0.0.0)
+RUN sed -e '/listen =/s/127.0.0.1/0.0.0.0/g' -i /etc/php7/php-fpm.d/www.conf
 
 #takes the php config and pasted on the container
 COPY srcs/wp-config.php www/wp-config.php
