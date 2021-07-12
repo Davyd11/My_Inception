@@ -28,7 +28,5 @@ RUN sed -e '/listen =/s/127.0.0.1/0.0.0.0/g' -i /etc/php7/php-fpm.d/www.conf
 
 #takes the php config and pasted on the container
 COPY srcs/wp-config.php www/wp-config.php
-#CMD tail -f /dev/null 
-#CMD /usr/bin/php -S 0.0.0.0:9000 -t /www/ && tail -f /dev/null
 
 CMD openrc && touch /run/openrc/softlevel && rc-service php-fpm7 restart && php-fpm7 --nodaemonize

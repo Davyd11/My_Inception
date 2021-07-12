@@ -1,6 +1,13 @@
-rc-service mariadb restart
+rc-service mariadb restart 
 
-sleep 10 #el sleep tiene que cambiarse por saber cuando el proceso esta iniciado 
+sleep 10
+
+#if <expression for checking>;
+#then
+#<set of commands to be executed>
+#else
+#<set of other commands to be executed>
+#fi
 
 mysql -e "CREATE DATABASE mydb;"
 mysql -e "CREATE USER 'user'@'%' IDENTIFIED BY 'user';"
