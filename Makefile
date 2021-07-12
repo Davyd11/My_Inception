@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/01 10:15:32 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/12 13:41:31 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ info:
 	@echo "--------------------------------------------------------------------------"
 	docker ps -a
 	@echo "--------------------------------------------------------------------------"
+	docker volume ls
+	@echo "--------------------------------------------------------------------------"
 
 build:
 	mkdir -p srcs/wordpress/data
@@ -53,13 +55,11 @@ stop:
 del:
 	docker rm $$(docker ps -a -q)
 
-del_data:
-	rm -rf srcs/wordpress/data/*
-	rm -rf srcs/mariadb/data/*
 prune:
 	docker system prune -a -f
-	docker volume prune -f
-
+	rm -rf srcs/wordpress/data
+	rm -rf srcs/mariadb/data
+	
 nginx:
 	docker exec -it nginx sh
 

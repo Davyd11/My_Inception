@@ -44,7 +44,7 @@ services:
             - default
         depends_on:
             - mariadb
-		env_file: .env
+        env_file: .env
         environment:
             WORDPRESS_DB_USER: "${DB_U}"
             WORDPRESS_DB_PASSWORD: "${DB_PW}"

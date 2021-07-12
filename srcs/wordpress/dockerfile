@@ -14,19 +14,23 @@ RUN apk add mariadb-client && apk add openrc
 RUN wget http://wordpress.org/latest.tar.gz\
 && tar -xzvf latest.tar.gz && rm latest.tar.gz\
 && mkdir /www \
-&& mv wordpress/* /www \
-&& rm -f latest.tar.gz\
-&& rm -rf /var/cache/apk/*
+&& cp -R wordpress/* /www/ \
+&& rm -f latest.tar.gz \
+&& rm -rf /var/cache/apk/* \
+&& rm -rf /wordpress
+
+#takes the php config and pasted on the container
+COPY srcs/wp-config.php www/wp-config.php
+
+COPY srcs/env_index.sh .
+RUN chmod -R 777 env_index.sh
 
 # synbolic link between www and wordpress
-RUN  ln -s www/* wordpress/
+#RUN  ln -s www/* wordpress/
 
 RUN sed -e '/skip-networking/s/^/#/g' -i /etc/my.cnf.d/mariadb-server.cnf
 
 #wordpress connection fastcgi on 0.0.0.0(replacing localhost to 0.0.0.0)
 RUN sed -e '/listen =/s/127.0.0.1/0.0.0.0/g' -i /etc/php7/php-fpm.d/www.conf
-
-#takes the php config and pasted on the container
-COPY srcs/wp-config.php www/wp-config.php
 
 CMD openrc && touch /run/openrc/softlevel && rc-service php-fpm7 restart && php-fpm7 --nodaemonize
