@@ -30,4 +30,7 @@ RUN sed -e '/skip-networking/s/^/#/g' -i /etc/my.cnf.d/mariadb-server.cnf
 #wordpress connection fastcgi on 0.0.0.0(replacing localhost to 0.0.0.0)
 RUN sed -e '/listen =/s/127.0.0.1/0.0.0.0/g' -i /etc/php7/php-fpm.d/www.conf
 
+#########################create volume directories
+########################RUN mkdir -p /home/dpuente-/data/wordpress
+
 CMD ./env_in.sh && openrc && touch /run/openrc/softlevel && rc-service php-fpm7 restart && php-fpm7 --nodaemonize

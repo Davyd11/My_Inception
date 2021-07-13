@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/13 12:30:51 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/13 23:45:13 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ info:
 build:
 	mkdir -p srcs/requirements/wordpress/data
 	mkdir -p srcs/requirements/mariadb/data
-	docker build -t service_nginx srcs/requirements/nginx/ &>/dev/null
-	docker build -t service_wordpress srcs/requirements/wordpress/ &>/dev/null
-	docker build -t service_mariadb srcs/requirements/mariadb/ &>/dev/null
+	docker build -t service_nginx srcs/requirements/nginx/ 
+	docker build -t service_wordpress srcs/requirements/wordpress/ 
+	docker build -t service_mariadb srcs/requirements/mariadb/ 
 
 run:
 	docker-compose -f srcs/docker-compose.yaml up -d
