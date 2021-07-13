@@ -2,17 +2,17 @@ version: '3'
 
 volumes:
     wordpress:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: srcs/requirements/wordpress/data/
+     #   driver: local
+      #  driver_opts:
+      #      type: none
+       #     o: bind
+           # device: srcs/requirements/wordpress/data/
     mariadb:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: srcs/requirements/mariadb/data/
+      #  driver: local
+      #  driver_opts:
+         #   type: none
+          #  o: bind
+           # device: srcs/requirements/mariadb/data/
 services:
     nginx:
         depends_on:

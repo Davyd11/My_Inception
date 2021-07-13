@@ -12,14 +12,10 @@ server {
         ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
         ssl_certificate_key /etc/ssl/certs/nginx-selfsigned.key;
 
-        server_name dpuente-.42.fr;
+        server_name dpuente-.42.fr www.dpuente-.42.fr;
     	ssl_protocols TLSv1.2;
 
         root /www/;
-
-        location / {
-                index index.php;
-        }
 
         location ~ \.php$ 
         {
