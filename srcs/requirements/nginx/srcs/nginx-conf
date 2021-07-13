@@ -1,7 +1,7 @@
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
-        server_name localhost dpuente-;
+        server_name dpuente-.42.fr www.dpuente-.42.fr;
         return 301 https://$server_name$request_uri;
 }
 
@@ -12,7 +12,7 @@ server {
         ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
         ssl_certificate_key /etc/ssl/certs/nginx-selfsigned.key;
 
-        server_name dpuente-;
+        server_name dpuente-.42.fr;
     	ssl_protocols TLSv1.2;
 
         root /www/;

@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/12 13:41:31 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/13 10:13:40 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ info:
 	@echo "--------------------------------------------------------------------------"
 
 build:
-	mkdir -p srcs/wordpress/data
-	mkdir -p srcs/mariadb/data
-	docker build -t service_nginx srcs/nginx/ 
-	docker build -t service_wordpress srcs/wordpress/
-	docker build -t service_mariadb srcs/mariadb/
+	mkdir -p srcs/requirements/wordpress/data
+	mkdir -p srcs/requirements/mariadb/data
+	docker build -t service_nginx srcs/requirements/nginx/ 
+	docker build -t service_wordpress srcs/requirements/wordpress/
+	docker build -t service_mariadb srcs/requirements/mariadb/
 
 run:
 	docker-compose -f srcs/docker-compose.yaml up -d
@@ -57,8 +57,10 @@ del:
 
 prune:
 	docker system prune -a -f
-	rm -rf srcs/wordpress/data
-	rm -rf srcs/mariadb/data
+	docker volume rm srcs_mariadb
+	docker volume rm srcs_wordpress
+	rm -rf srcs/requirements/wordpress/data
+	rm -rf srcs/requirements/mariadb/data
 	
 nginx:
 	docker exec -it nginx sh
