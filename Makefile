@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/13 23:45:13 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/14 09:50:34 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ all:
 	@echo "Use the following parameters after the make rule for a personalized build"
 	@echo ""
 	@echo " -- [info] display all images and containers"
+	@echo " -- [append] append domain redirection"
 	@echo " -- [build] to build all images needed"
 	@echo " -- [run] to mount all images"
 	@echo " -- [fast] to build and mount all images"
@@ -36,6 +37,10 @@ info:
 	@echo "--------------------------------------------------------------------------"
 	docker volume ls
 	@echo "--------------------------------------------------------------------------"
+
+append: #anadir a fast una vez creada la maquina virtual, maquina host no permite editar as redirecciones
+	echo "127.0.0.1		dpuente-.42.fr">> /etc/hosts \
+	&& echo "127.0.0.1		www.dpuente-.42.fr">> /etc/hosts
 
 build:
 	mkdir -p srcs/requirements/wordpress/data
