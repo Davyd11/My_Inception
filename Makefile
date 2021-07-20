@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/14 09:50:34 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/20 10:42:49 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ all:
 	@echo " -- [fast] to build and mount all images"
 	@echo " -- [stop] to stop all running containers"
 	@echo " -- [del] to delete all exited containers"
-	@echo " -- [prune] to delete all conatiners and images created"
+	@echo " -- [prune] to delete all containers, images created and volumes"
 	@echo " -- [re] execute prune and fast"
 	@echo " -- [nginx] access bash container"
 	@echo " -- [wordpress] access bash container"
@@ -30,7 +30,7 @@ all:
 	@echo ""
 
 info:
-	@echo "--------------------------------------------------------------------------"	
+	@echo "--------------------------------------------------------------------------"
 	docker images
 	@echo "--------------------------------------------------------------------------"
 	docker ps -a
@@ -45,8 +45,8 @@ append: #anadir a fast una vez creada la maquina virtual, maquina host no permit
 build:
 	mkdir -p srcs/requirements/wordpress/data
 	mkdir -p srcs/requirements/mariadb/data
-	docker build -t service_nginx srcs/requirements/nginx/ 
-	docker build -t service_wordpress srcs/requirements/wordpress/ 
+	docker build -t service_nginx srcs/requirements/nginx/
+	docker build -t service_wordpress srcs/requirements/wordpress/
 	docker build -t service_mariadb srcs/requirements/mariadb/ 
 
 run:
