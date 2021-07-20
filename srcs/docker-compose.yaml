@@ -2,17 +2,17 @@ version: '3'
 
 volumes:
     wordpress:
-        #driver: local
-        #driver_opts:
-        #    type: none
-        #    o: bind
-        #    device: /home/dpuente-/data/wordpress
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/dpuente-/data/wordpress
     mariadb:
-        #driver: local
-        #driver_opts:
-        #    type: none
-        #    o: bind
-        #    device: /home/dpuente-/data/mariadb
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/dpuente-/data/mariadb
 services:
     nginx:
         depends_on:
@@ -35,6 +35,8 @@ services:
             - default
         restart: always
         env_file: .env
+        volumes:
+            - mariadb:/data/
 
     wordpress:
         image: service_wordpress
@@ -45,10 +47,10 @@ services:
         depends_on:
             - mariadb
         env_file: .env
-        environment:
-            WORDPRESS_DB_USER: "${DB_U}"
-            WORDPRESS_DB_PASSWORD: "${DB_PW}"
-            WORDPRESS_DB_NAME: "${DB_N}"
+       # environment:
+           # WORDPRESS_DB_USER: "${DB_U}"
+           # WORDPRESS_DB_PASSWORD: "${DB_PW}"
+           # WORDPRESS_DB_NAME: "${DB_N}"
         restart: on-failure
         volumes:
             - wordpress:/www/
