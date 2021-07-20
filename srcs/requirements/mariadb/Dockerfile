@@ -15,7 +15,8 @@ LABEL description="mariadb Server"
 COPY srcs/start_mariadb.sh .
 RUN chmod -R 777 start_mariadb.sh
 
-#########################create volume directories
-########################RUN mkdir -p /home/dpuente-/data/mariadb
+#create volume directories
+#RUN mkdir -p /home/dpuente-/data/mariadb
+#RUN chmod -R 755 /home/dpuente-/data/mariadb
 
 CMD ./start_mariadb.sh && mysqld_safe
