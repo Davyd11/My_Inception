@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/20 11:36:43 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/20 12:06:48 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ append: #anadir a fast una vez creada la maquina virtual, maquina host no permit
 	&& echo "127.0.0.1		www.dpuente-.42.fr">> /etc/hosts
 
 build:
-	mkdir -p /home/dpuente-/wordpress/data
-	mkdir -p /home/dpuente-/mariadb/data
+	mkdir -p /home/dpuente-/data/wordpress
+	mkdir -p /home/dpuente-/data/mariadb
 	docker build -t service_nginx srcs/requirements/nginx/
 	docker build -t service_wordpress srcs/requirements/wordpress/
 	docker build -t service_mariadb srcs/requirements/mariadb/ 

@@ -16,6 +16,7 @@ server {
     	ssl_protocols TLSv1.2;
 
         root /www/;
+        index index.php;
 
         location ~ \.php$ 
         {
