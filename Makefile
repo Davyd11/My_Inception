@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/20 12:06:48 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/21 10:10:37 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ info:
 	docker volume ls
 	@echo "--------------------------------------------------------------------------"
 
-append: #anadir a fast una vez creada la maquina virtual, maquina host no permite editar as redirecciones
+append:
 	echo "127.0.0.1		dpuente-.42.fr">> /etc/hosts \
 	&& echo "127.0.0.1		www.dpuente-.42.fr">> /etc/hosts
 
