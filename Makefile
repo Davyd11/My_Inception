@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpuente- <dpuente-@student.42madrid.com    +#+  +:+       +#+         #
+#    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/21 10:10:37 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/22 11:50:50 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ all:
 	@echo ""
 	@echo "Use the following parameters after the make rule for a personalized build"
 	@echo ""
-	@echo " -- [info] display all images and containers"
+	@echo " -- [info] display all images, containers and volumes"
 	@echo " -- [append] append domain redirection"
 	@echo " -- [build] to build all images needed"
 	@echo " -- [run] to mount all images"
