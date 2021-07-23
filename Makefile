@@ -6,7 +6,7 @@
 #    By: dpuente- <dpuente-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 21:34:45 by dpuente-          #+#    #+#              #
-#    Updated: 2021/07/22 11:50:50 by dpuente-         ###   ########.fr        #
+#    Updated: 2021/07/23 10:01:07 by dpuente-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ all:
 	@echo " -- [stop] to stop all running containers"
 	@echo " -- [del] to delete all exited containers"
 	@echo " -- [prune] to delete all containers, images created and volumes"
+	@echo " -- [prune_data] delet all already saved data from volumes"
 	@echo " -- [re] execute prune and fast"
 	@echo " -- [nginx] access bash container"
 	@echo " -- [wordpress] access bash container"
@@ -64,9 +65,10 @@ prune:
 	docker system prune -a -f
 	docker volume rm srcs_mariadb
 	docker volume rm srcs_wordpress
+
+prune_data:
 	rm -rf srcs/requirements/wordpress/data
 	rm -rf srcs/requirements/mariadb/data
-	
 nginx:
 	docker exec -it nginx sh
 
